@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@drawable/bg002"
+    tools:context=".Constellation">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#00ffffff"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_centerInParent="true"/>
+
+
+    <TextView
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/cs_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XX자리"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/seoulhangang"/>
+
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/cs_d_img"
+        android:src="@drawable/cs11"
+        android:layout_below="@id/cs_name"
+        />
+
+
+    <TextView
+        android:id="@+id/cs_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:textColor="#ffffff"
+        android:text="보이는 시각, 방향: XX시간 XX방향"
+        android:layout_below="@id/cs_d_img"
+        android:textSize="16sp"
+        android:fontFamily="@font/seoulhangang"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cs_view"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:id="@+id/cs_story"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="설화: "
+            android:textSize="16sp"
+            android:fontFamily="@font/seoulhangang"
+            android:lineSpacingExtra="15dip"/>
+    </ScrollView>
+
+
+</RelativeLayout>

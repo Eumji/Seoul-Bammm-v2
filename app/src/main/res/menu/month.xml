@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/january"
+        android:title="일월"
+      />
+    <item
+        android:id="@+id/february"
+        android:title="이월"
+        />
+    <item
+        android:id="@+id/march"
+        android:title="삼월"
+        />
+    <item
+        android:id="@+id/april"
+        android:title="사월"
+        />
+    <item
+        android:id="@+id/may"
+        android:title="오월"
+        />
+    <item
+        android:id="@+id/june"
+        android:title="유월"
+        />
+    <item
+        android:id="@+id/july"
+        android:title="칠월"
+        />
+    <item
+        android:id="@+id/august"
+        android:title="팔월"
+        />
+    <item
+        android:id="@+id/september"
+        android:title="구월"
+        />
+    <item
+        android:id="@+id/october"
+        android:title="시월"
+        />
+    <item
+        android:id="@+id/november"
+        android:title="십일월"
+        />
+    <item
+        android:id="@+id/december"
+        android:title="십이월"
+        />
+
+
+</menu>
