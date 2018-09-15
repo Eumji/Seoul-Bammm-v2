@@ -3,4 +3,7 @@
     <string name="intro1">Intro Page 1</string>
     <string name="intro2">Intro Page 2</string>
     <string name="main_menu">Main Menu</string>
+    <string name="hint_etLocation">  촬영한 장소를 상세하게 적어주세요\n  ex - XX공원 서쪽계단</string>
+    <string name="hint_etCamera">  촬영에 사용한 카메라 또는\n  카메라 어플/필터를 적어주세요\n  ex - B615 어플 Bamm 필터</string>
+
 </resources>

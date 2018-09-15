@@ -55,7 +55,8 @@ public class MainMenu extends AppCompatActivity {
                     startActivity(intent_recommendation_menu);
                     break;
                 case R.id.btn_main_menu03:
-                    Toast.makeText(MainMenu.this, "메뉴3", Toast.LENGTH_SHORT).show();
+                    Intent intent_commu_menu = new Intent(MainMenu.this,LoginActivity.class);
+                    startActivity(intent_commu_menu);
                     break;
                 default:break;
             }

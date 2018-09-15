@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostWritingActivity"
+    android:background="#f2f2f2">
+
+    <TextView
+        android:id="@+id/tvWritePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="게시글 작성"
+        android:textSize="25sp"
+        android:background="#00164B"
+        android:textColor="#ffffff"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textAlignment="center"/>
+
+    <ScrollView
+        android:layout_above="@+id/llPostWriteBtn"
+        android:layout_below="@+id/tvWritePost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivAddImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="10dp"
+                android:background="@drawable/plusimage"/>
+
+            <EditText
+                android:id="@+id/etLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hint_etLocation"
+                android:background="@drawable/writepostbackground"/>
+
+            <EditText
+                android:id="@+id/etCamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/hint_etCamera"
+                android:background="@drawable/writepostbackground"/>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/llPostWriteBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnPostWriteCancel"
+            android:text="취소"
+            android:textSize="20sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="#00164B"
+            android:textColor="#ffffff"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btnPostWriteUpload"
+            android:text="완료"
+            android:textSize="20sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="#00164B"
+            android:textColor="#ffffff"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/pbPostUpload"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+
+</RelativeLayout>
