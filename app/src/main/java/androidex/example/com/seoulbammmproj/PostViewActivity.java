@@ -14,11 +14,14 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.message.template.ButtonObject;
@@ -45,8 +48,8 @@ public class PostViewActivity extends AppCompatActivity {
     final static String TAG = "PostViewActivityyy";
 
     String postDate;
-    String strUserId, strLikeNum;
-    ArrayList<String> postdetail;
+    String strUserId, strLikeNum, currentUid;
+    ArrayList<String> postdetail, likePeople;
     Post post = new Post();
 
     Toolbar toolbar;
@@ -89,18 +92,30 @@ public class PostViewActivity extends AppCompatActivity {
         postDate = getIntent().getStringExtra("date");
         Log.d(TAG, "onCreate: " + postDate);
         postdetail = new ArrayList<>();
+        likePeople = new ArrayList<>();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        currentUid = user.getUid();
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("posts").child(postDate);
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.d(TAG, "onChildAdded.toString(): "+dataSnapshot.getValue().toString());
-                postdetail.add(dataSnapshot.getValue().toString());
-                //Log.d(TAG, "postdetail : "+postdetail.toString());
-                if (postdetail.size() == 9){
-                    Log.d(TAG, "postdetail.get(0) : "+postdetail.get(0));
+                //Log.d(TAG, "size : "+postdetail.size());
+                //Log.d(TAG, "onChildAdded.toString(): "+dataSnapshot.getValue().toString());
+                if (postdetail.size() < 9) {
+                    postdetail.add(dataSnapshot.getValue().toString());
+                } else if (postdetail.size() == 9) {
                     viewPost();
+                } else {
+                    /*likePeople.add(dataSnapshot.getValue().toString());
+                    Log.d(TAG, "likePeople: "+likePeople.toString());
+                    if (dataSnapshot.getValue().toString() == post.getUid()){
+                        click_num = 1;
+                        ivMoon.setImageResource(R.drawable.moon_full);
+                        Log.d(TAG, "onChildAdded: already clicked");
+                    }*/
                 }
             }
 
@@ -162,6 +177,44 @@ public class PostViewActivity extends AppCompatActivity {
             }
         });*/
 
+
+        myRef.child("zzlikepeople").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                if (!dataSnapshot.getValue().toString().equals("")) {
+                    likePeople.add(dataSnapshot.getValue().toString());
+                    Log.d(TAG, "likePeople : " + likePeople.toString());
+                    Log.d(TAG, "currentUid : " + currentUid);
+                    if (dataSnapshot.getValue().toString().equals(currentUid)) {
+                        click_num = 1;
+                        ivMoon.setImageResource(R.drawable.moon_full);
+                        Log.d(TAG, "onChildAdded: already clicked");
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         ivMoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,6 +225,7 @@ public class PostViewActivity extends AppCompatActivity {
                     strLikeNum = Integer.toString(num_1);
                     tvLikeNum.setText(strLikeNum);
                     click_num = 1;
+                    likePeople.add(currentUid);
                     ivMoon.setImageResource(R.drawable.moon_full);
                 } else {
                     strLikeNum = (String) tvLikeNum.getText();
@@ -180,9 +234,15 @@ public class PostViewActivity extends AppCompatActivity {
                     strLikeNum = Integer.toString(num_1);
                     tvLikeNum.setText(strLikeNum);
                     click_num = 0;
+                    likePeople.remove(currentUid);
                     ivMoon.setImageResource(R.drawable.moon_empty);
                 }
                 myRef.child("like").setValue(strLikeNum);
+                if (likePeople.isEmpty()) {
+                    myRef.child("zzlikepeople").setValue("");
+                    myRef.child("zzlikepeople").child("0").setValue("");
+                } else
+                    myRef.child("zzlikepeople").setValue(likePeople);
             }
         });
 
@@ -200,7 +260,7 @@ public class PostViewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void viewPost(){
+    private void viewPost() {
         post.setCamera(postdetail.get(0));
         post.setDate(postdetail.get(1));
         post.setEmail(postdetail.get(2));
@@ -228,7 +288,8 @@ public class PostViewActivity extends AppCompatActivity {
         });
     }
 
-    private String getUserId(String email){
+
+    private String getUserId(String email) {
         strUserId = email.split("@")[0];
         return strUserId;
     }

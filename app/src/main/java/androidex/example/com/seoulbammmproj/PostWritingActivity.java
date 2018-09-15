@@ -79,7 +79,7 @@ public class PostWritingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder popupCancel = new AlertDialog.Builder(PostWritingActivity.this);
-                popupCancel.setMessage("정말 취소하실래요?")
+                popupCancel.setMessage("정말 취소하시겠어요?")
                         .setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -89,7 +89,7 @@ public class PostWritingActivity extends AppCompatActivity {
                         .setNegativeButton("아뇨", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(PostWritingActivity.this, "버튼 조심해서 누르세요~~", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(PostWritingActivity.this, "버튼 조심해서 누르세요~~", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .show();
@@ -152,7 +152,7 @@ public class PostWritingActivity extends AppCompatActivity {
                         .setNegativeButton("아뇨", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(PostWritingActivity.this, "버튼 조심해서 누르세요~~", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(PostWritingActivity.this, "버튼 조심해서 누르세요~~", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .show();
@@ -221,9 +221,10 @@ public class PostWritingActivity extends AppCompatActivity {
                             posts.put("date",currentDate);
                             posts.put("tag", "");
                             myRef.setValue(posts);
+                            myRef.child("zzlikepeople").child("0").setValue("");
 
                             pbPostUpload.setVisibility(View.INVISIBLE);
-                            Toast.makeText(PostWritingActivity.this, "업로드 완료!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PostWritingActivity.this, "업로드 완료! 새로고침 버튼을 눌러주세요~", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });
