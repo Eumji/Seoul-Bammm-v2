@@ -218,6 +218,7 @@ public class PostWritingActivity extends AppCompatActivity {
                             posts.put("image", strImage);
                             posts.put("location", strLocation);
                             posts.put("camera", strCamera);
+                            posts.put("date",currentDate);
                             posts.put("tag", "");
                             myRef.setValue(posts);
 

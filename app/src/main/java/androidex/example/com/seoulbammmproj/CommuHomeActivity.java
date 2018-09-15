@@ -1,5 +1,6 @@
 package androidex.example.com.seoulbammmproj;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Handler;
@@ -15,8 +16,10 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -257,5 +260,12 @@ public class CommuHomeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void viewPostDetail(String date){
+        Intent intent = new Intent(CommuHomeActivity.this,PostViewActivity.class);
+        intent.putExtra("date",date);
+        startActivity(intent);
+    }
+
 
 }

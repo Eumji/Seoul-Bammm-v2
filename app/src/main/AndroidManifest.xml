@@ -57,6 +57,7 @@
         <activity android:name=".CommuHomeActivity" />
         <activity android:name=".PostWritingActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".PostViewActivity"/>
     </application>
 
 </manifest>

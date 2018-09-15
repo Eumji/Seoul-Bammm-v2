@@ -1,5 +1,7 @@
 package androidex.example.com.seoulbammmproj;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,6 +67,17 @@ public class PostListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Log.d(TAG,"getDate() : "+mPost.get(position).getDate());
         Log.d(TAG,"getImage() : "+mPost.get(position).getImage());
         Log.d(TAG,"onBindViewHolder() ... 썸네일 가져오기");
+
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Post thisPost = mPost.get(position);
+                Log.d(TAG, "onClick: "+thisPost.getCamera());
+                CommuHomeActivity commuHomeActivity;
+                commuHomeActivity = (CommuHomeActivity) view.getContext();
+                commuHomeActivity.viewPostDetail(thisPost.getDate());
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
