@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 
 public class RecommendationMenu  extends AppCompatActivity {
-    ImageButton noeul, gyenam, ansan, building63, bukak, kyeongbok, naksan, gaeun, banpo, ungbong, sukchon, namsan, olympic;
+    ImageButton noeul, sunyu, seoullo, building63, bukak, kyeongbok, naksan, dungdung, banpo, ungbong, sukchon, namsan, olympic;
     Intent i;
 
     Toolbar toolbar;
@@ -28,13 +28,13 @@ public class RecommendationMenu  extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         noeul = (ImageButton) findViewById(R.id.noeul);
-        gyenam = (ImageButton) findViewById(R.id.gyenam);
-        ansan = (ImageButton) findViewById(R.id.ansan);
+        sunyu = (ImageButton) findViewById(R.id.sunyu);
+        seoullo = (ImageButton) findViewById(R.id.seoullo);
         building63 = (ImageButton) findViewById(R.id.building63);
         bukak = (ImageButton) findViewById(R.id.bukak);
         kyeongbok = (ImageButton) findViewById(R.id.kyeongbok);
         naksan = (ImageButton) findViewById(R.id.naksan);
-        gaeun = (ImageButton) findViewById(R.id.gaeun);
+        dungdung = (ImageButton) findViewById(R.id.dungdung);
         banpo = (ImageButton) findViewById(R.id.banpo);
         ungbong = (ImageButton) findViewById(R.id.ungbong);
         sukchon = (ImageButton) findViewById(R.id.sukchon);
@@ -44,13 +44,13 @@ public class RecommendationMenu  extends AppCompatActivity {
 
 
         noeul.setOnClickListener(listener);
-        gyenam.setOnClickListener(listener);
-        ansan.setOnClickListener(listener);
+        sunyu.setOnClickListener(listener);
+        seoullo.setOnClickListener(listener);
         building63.setOnClickListener(listener);
         bukak.setOnClickListener(listener);
         kyeongbok.setOnClickListener(listener);
         naksan.setOnClickListener(listener);
-        gaeun.setOnClickListener(listener);
+        dungdung.setOnClickListener(listener);
         banpo.setOnClickListener(listener);
         ungbong.setOnClickListener(listener);
         sukchon.setOnClickListener(listener);
@@ -68,14 +68,14 @@ public class RecommendationMenu  extends AppCompatActivity {
                     intent("noeul");
                     break;
 
-                case R.id.gyenam:
+                case R.id.sunyu:
                     //Toast.makeText(MainActivity.this, "2",Toast.LENGTH_SHORT).show();
-                    intent("gyenam");
+                    intent("sunyu");
                     break;
 
-                case R.id.ansan:
+                case R.id.seoullo:
                     //Toast.makeText(MainActivity.this, "3",Toast.LENGTH_SHORT).show();
-                    intent("ansan");
+                    intent("seoullo");
                     break;
 
                 case R.id.building63:
@@ -94,9 +94,9 @@ public class RecommendationMenu  extends AppCompatActivity {
                     //Toast.makeText(MainActivity.this, "7",Toast.LENGTH_SHORT).show();
                     intent("naksan");
                     break;
-                case R.id.gaeun:
+                case R.id.dungdung:
                     //Toast.makeText(MainActivity.this, "8",Toast.LENGTH_SHORT).show();
-                    intent("gaeun");
+                    intent("dungdung");
                     break;
                 case R.id.banpo:
                     //Toast.makeText(MainActivity.this, "9",Toast.LENGTH_SHORT).show();
