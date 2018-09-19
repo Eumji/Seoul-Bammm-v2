@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -248,6 +250,14 @@ public class PostViewActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(logout);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.delete, menu);
+        return true;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -256,6 +266,8 @@ public class PostViewActivity extends AppCompatActivity {
                 finish();
                 return true;
             }
+            case R.id.deletePost:
+
         }
         return super.onOptionsItemSelected(item);
     }
