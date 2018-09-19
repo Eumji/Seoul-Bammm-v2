@@ -147,27 +147,35 @@ public class PostViewActivity extends AppCompatActivity {
         share_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FeedTemplate params = FeedTemplate
-                        .newBuilder(ContentObject.newBuilder(tvLocation.getText().toString(),
-                                postdetail.get(3),
-                                LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
-                                        .setMobileWebUrl("https://developers.kakao.com").build())
-                                .setDescrption(tvCamera.getText().toString())
-                                .build())
-                        .setSocial(SocialObject.newBuilder().setLikeCount(Integer.parseInt((String)tvLikeNum.getText())).build())
-                        .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
-                                .setWebUrl("'https://developers.kakao.com")
-                                .setMobileWebUrl("'https://developers.kakao.com")
-                                .setAndroidExecutionParams("msg=" + postdetail)
-                                .setIosExecutionParams("key1=value1")
-                                .build()))
-                        .build();
+//                FeedTemplate params = FeedTemplate
+//                        .newBuilder(ContentObject.newBuilder(tvLocation.getText().toString(),
+//                                postdetail.get(3),
+//                                LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
+//                                        .setMobileWebUrl("https://developers.kakao.com").build())
+//                                .setDescrption(tvCamera.getText().toString())
+//                                .build())
+//                        .setSocial(SocialObject.newBuilder().setLikeCount(Integer.parseInt((String)tvLikeNum.getText())).build())
+////                        .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
+////                                .setWebUrl("'https://developers.kakao.com")
+////                                .setMobileWebUrl("'https://developers.kakao.com")
+////                                .setAndroidExecutionParams("msg=" + postdetail)
+////                                .setIosExecutionParams("key1=value1")
+////                                .build()))
+//                        .build();
+                String templateId = "12349";
+
+                Map<String, String> templateArgs = new HashMap<String, String>();
+                templateArgs.put("location", tvLocation.getText().toString());
+                templateArgs.put("camera", tvCamera.getText().toString());
+                templateArgs.put("like", (String)tvLikeNum.getText());
+                templateArgs.put("img_url", postdetail.get(3));
 
                 Map<String, String> serverCallbackArgs = new HashMap<String, String>();
                 serverCallbackArgs.put("user_id", "${current_user_id}");
                 serverCallbackArgs.put("product_id", "${shared_product_id}");
 
-                KakaoLinkService.getInstance().sendDefault(PostViewActivity.this, params, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
+
+                KakaoLinkService.getInstance().sendCustom(PostViewActivity.this, templateId, templateArgs, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
                     @Override
                     public void onFailure(ErrorResult errorResult) {
                         Logger.e(errorResult.toString());
