@@ -1,10 +1,12 @@
 package androidex.example.com.seoulbammmproj;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -112,14 +114,6 @@ public class PostViewActivity extends AppCompatActivity {
                     postdetail.add(dataSnapshot.getValue().toString());
                 } else if (postdetail.size() == 9) {
                     viewPost();
-                } else {
-                    /*likePeople.add(dataSnapshot.getValue().toString());
-                    Log.d(TAG, "likePeople: "+likePeople.toString());
-                    if (dataSnapshot.getValue().toString() == post.getUid()){
-                        click_num = 1;
-                        ivMoon.setImageResource(R.drawable.moon_full);
-                        Log.d(TAG, "onChildAdded: already clicked");
-                    }*/
                 }
             }
 
@@ -309,13 +303,26 @@ public class PostViewActivity extends AppCompatActivity {
     }
     
     private void deletePost(){
-        if(post.getUid().equals(currentUid)){
-            myRef.removeValue();
-            Toast.makeText(this, "삭제 완료~ 새로고침 버튼을 눌러주세요!", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            Toast.makeText(this, "직접 쓴 게시글만 삭제할 수 있어요!", Toast.LENGTH_SHORT).show();
-        }
+        AlertDialog.Builder popupCancel = new AlertDialog.Builder(PostViewActivity.this);
+        popupCancel.setMessage("정말 삭제하시겠어요?")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(post.getUid().equals(currentUid)){
+                            myRef.removeValue();
+                            Toast.makeText(PostViewActivity.this, "삭제 완료~!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(PostViewActivity.this, "직접 쓴 게시글만 삭제할 수 있어요!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("아뇨", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                })
+                .show();
     }
 
 

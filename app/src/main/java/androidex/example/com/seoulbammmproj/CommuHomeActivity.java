@@ -43,7 +43,7 @@ public class CommuHomeActivity extends AppCompatActivity {
     ArrayList<Post> postsList;
     int height, width;
     public int flagRefresh; // 0이면 새로고침, 1이면 X
-    boolean flagFirstLoad;
+    public static boolean flagFirstLoad;
 
     private int previousTotal = 0;
     private boolean loading = true;
@@ -119,7 +119,9 @@ public class CommuHomeActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Post post = dataSnapshot.getValue(Post.class);
+                Log.d(TAG, "onChildAdded: postsList = " + post.toString());
                 postsList.add(post);
+                Log.d(TAG, "onChildAdded: postsList.size() = " + postsList.size());
 
                 if (flagFirstLoad) {
                     new Handler().postDelayed(new Runnable() {
@@ -140,7 +142,16 @@ public class CommuHomeActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                Post post = dataSnapshot.getValue(Post.class);
+                String delete = post.getDate();
+                for (int i = 0; i < postsList.size(); i++) {
+                    if (postsList.get(i).getDate().equals(delete)) {
+                        postsList.remove(postsList.get(i));
+                        mAdapter.notifyItemRemoved(i);
+                    }
+                }
+                Log.d(TAG, "onChildRemoved: postsList = " + post.toString());
+                Log.d(TAG, "onChildRemoved: postsList.size() = " + postsList.size());
             }
 
             @Override
@@ -232,11 +243,11 @@ public class CommuHomeActivity extends AppCompatActivity {
 
     }
 
-    public void signOut(){
+    public void signOut() {
         FirebaseAuth.getInstance().signOut();
         finish();
-        Intent intent = new Intent(CommuHomeActivity.this,LoginActivity.class);
-        intent.putExtra("sign",LoginActivity.RC_SIGN_OUT);
+        Intent intent = new Intent(CommuHomeActivity.this, LoginActivity.class);
+        intent.putExtra("sign", LoginActivity.RC_SIGN_OUT);
         startActivity(intent);
     }
 
@@ -249,8 +260,8 @@ public class CommuHomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
@@ -261,9 +272,9 @@ public class CommuHomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void viewPostDetail(String date){
-        Intent intent = new Intent(CommuHomeActivity.this,PostViewActivity.class);
-        intent.putExtra("date",date);
+    public void viewPostDetail(String date) {
+        Intent intent = new Intent(CommuHomeActivity.this, PostViewActivity.class);
+        intent.putExtra("date", date);
         startActivity(intent);
     }
 
