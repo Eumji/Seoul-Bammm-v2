@@ -80,7 +80,7 @@ public class ConstellationMenu extends AppCompatActivity {
     void getArray(){//이미지 매열에 이미지 넣는 함수 i=월, j=번째
         for(int i=1;i<=12;i++) {
             for (int j = 1; j <= 4; j++) {
-                imgs[i][j] = getApplicationContext().getResources().getIdentifier("cs" + i + j, "drawable", "androidex.example.com.seoulbammmproj");
+                imgs[i][j] = getApplicationContext().getResources().getIdentifier("c" + i + j, "drawable", "androidex.example.com.seoulbammmproj");
             }
         }
         return;
@@ -154,7 +154,7 @@ public class ConstellationMenu extends AppCompatActivity {
                 nowMonth=5;
                 break;
             case "06":
-                tv_month.setText("육월");
+                tv_month.setText("유월");
                 setCs(6);
                 nowMonth=6;
                 break;
@@ -174,7 +174,7 @@ public class ConstellationMenu extends AppCompatActivity {
                 nowMonth=9;
                 break;
             case "10":
-                tv_month.setText("십월");
+                tv_month.setText("시월");
                 setCs(10);
                 nowMonth=10;
                 break;
