@@ -48,8 +48,10 @@
             android:id="@+id/banpo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintEnd_toStartOf="@+id/ungbong"
+            app:layout_constraintStart_toStartOf="@+id/namsan"
             app:layout_constraintTop_toBottomOf="@+id/seoullo"
             app:srcCompat="@drawable/bluestar" />
 
@@ -57,46 +59,46 @@
             android:id="@+id/sukchon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="21dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintStart_toStartOf="@+id/ungbong"
-            app:layout_constraintTop_toTopOf="@+id/olympic"
+            app:layout_constraintEnd_toEndOf="@+id/olympic"
+            app:layout_constraintTop_toTopOf="@+id/ungbong"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
             android:id="@+id/noeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="11dp"
-            android:layout_marginRight="11dp"
+            android:layout_marginBottom="21dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/building63"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/sunyu"
+            app:layout_constraintEnd_toStartOf="@+id/sunyu"
+            app:layout_constraintStart_toStartOf="@+id/sunyu"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
             android:id="@+id/olympic"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginEnd="54dp"
+            android:layout_marginRight="54dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintBottom_toBottomOf="@+id/banpo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ungbong"
-            app:layout_constraintTop_toTopOf="@+id/banpo"
+            app:layout_constraintTop_toTopOf="@+id/ungbong"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
             android:id="@+id/naksan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintStart_toEndOf="@+id/bukak"
+            app:layout_constraintStart_toStartOf="@+id/bukak"
             app:layout_constraintTop_toTopOf="@+id/bukak"
             app:srcCompat="@drawable/bluestar" />
 
@@ -104,49 +106,41 @@
             android:id="@+id/ungbong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintBottom_toTopOf="@+id/sukchon"
-            app:layout_constraintEnd_toStartOf="@+id/olympic"
-            app:layout_constraintStart_toEndOf="@+id/namsan"
+            app:layout_constraintEnd_toStartOf="@+id/sukchon"
+            app:layout_constraintTop_toTopOf="@+id/namsan"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
             android:id="@+id/bukak"
             android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:layout_marginBottom="84dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="83dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="81dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintBottom_toBottomOf="@+id/building63"
             app:layout_constraintEnd_toEndOf="@+id/namsan"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
             android:id="@+id/namsan"
-            android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_marginBottom="36dp"
-            android:layout_marginTop="43dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/bluestar"
-            app:layout_constraintBottom_toBottomOf="@+id/dungdung"
             app:layout_constraintEnd_toStartOf="@+id/ungbong"
-            app:layout_constraintStart_toEndOf="@+id/dungdung"
-            app:layout_constraintTop_toTopOf="@+id/kyeongbok"
+            app:layout_constraintTop_toTopOf="@+id/seoullo"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
             android:id="@+id/dungdung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintEnd_toStartOf="@+id/namsan"
-            app:layout_constraintStart_toEndOf="@+id/sunyu"
+            app:layout_constraintEnd_toStartOf="@+id/banpo"
+            app:layout_constraintStart_toStartOf="@+id/banpo"
             app:layout_constraintTop_toTopOf="@+id/banpo"
             app:srcCompat="@drawable/bluestar" />
 
@@ -154,10 +148,9 @@
             android:id="@+id/kyeongbok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
             android:background="@drawable/bluestar"
             app:layout_constraintStart_toStartOf="@+id/bukak"
-            app:layout_constraintTop_toTopOf="@+id/naksan"
+            app:layout_constraintTop_toBottomOf="@+id/bukak"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
@@ -173,25 +166,26 @@
             android:id="@+id/sunyu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:layout_marginEnd="29dp"
-            android:layout_marginLeft="97dp"
-            android:layout_marginRight="29dp"
-            android:layout_marginStart="97dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintBottom_toBottomOf="@+id/building63"
-            app:layout_constraintEnd_toStartOf="@+id/dungdung"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/seoullo"
+            app:layout_constraintTop_toTopOf="@+id/seoullo"
             app:srcCompat="@drawable/bluestar" />
 
         <ImageButton
             android:id="@+id/building63"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
+            android:layout_marginLeft="230dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginStart="230dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bluestar"
-            app:layout_constraintStart_toEndOf="@+id/sunyu"
-            app:layout_constraintTop_toBottomOf="@+id/noeul"
+            app:layout_constraintEnd_toStartOf="@+id/dungdung"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/seoullo"
             app:srcCompat="@drawable/bluestar" />
 
     </android.support.constraint.ConstraintLayout>
