@@ -91,8 +91,6 @@ public class ConstellationMenu extends AppCompatActivity {
         cs02.setImageResource(imgs[month][2]);
         cs03.setImageResource(imgs[month][3]);
         cs04.setImageResource(imgs[month][4]);
-//        cs05.setImageResource(imgs[month][5]);
-//        cs06.setImageResource(imgs[month][6]);
     }
 
 

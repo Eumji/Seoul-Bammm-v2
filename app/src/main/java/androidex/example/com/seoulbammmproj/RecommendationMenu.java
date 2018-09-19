@@ -115,7 +115,7 @@ public class RecommendationMenu  extends AppCompatActivity {
                     intent("namsan");
                     break;
                 case R.id.olympic:
-                    //Toast.makeText(MainActivity.this, "13",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "c13",Toast.LENGTH_SHORT).show();
                     intent("olympic");
                     break;
             }
