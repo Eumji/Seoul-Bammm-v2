@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -271,6 +272,9 @@ public class PostViewActivity extends AppCompatActivity {
                 return true;
             }
             case R.id.deletePost:
+                deletePost();
+                return true;
+
 
         }
         return super.onOptionsItemSelected(item);
@@ -302,6 +306,16 @@ public class PostViewActivity extends AppCompatActivity {
                 tvUserId.setText(getUserId(post.getEmail()));
             }
         });
+    }
+    
+    private void deletePost(){
+        if(post.getUid().equals(currentUid)){
+            myRef.removeValue();
+            Toast.makeText(this, "삭제 완료~ 새로고침 버튼을 눌러주세요!", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(this, "직접 쓴 게시글만 삭제할 수 있어요!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
