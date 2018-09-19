@@ -50,6 +50,8 @@ public class RecommendationBoard  extends AppCompatActivity {
 
     int click_num = 0;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -30,6 +30,7 @@ import com.kakao.message.template.ButtonObject;
 import com.kakao.message.template.ContentObject;
 import com.kakao.message.template.FeedTemplate;
 import com.kakao.message.template.LinkObject;
+import com.kakao.message.template.SocialObject;
 import com.kakao.network.ErrorResult;
 import com.kakao.network.callback.ResponseCallback;
 import com.kakao.util.helper.log.Logger;
@@ -143,20 +144,21 @@ public class PostViewActivity extends AppCompatActivity {
         });
 
 
-        /*share_btn.setOnClickListener(new View.OnClickListener() {
+        share_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FeedTemplate params = FeedTemplate
-                        .newBuilder(ContentObject.newBuilder("나만의 명소",
-                                "https://postfiles.pstatic.net/MjAxODA4MjlfMjU5/MDAxNTM1NDgwMTc3MDYy.fwN6Pzslx7OSB1AoCnND5pPy3sqSj20EY7HB4SHey-Eg._3tY4q-wu4JcICqSY5lkx0DpYal2qt-LhZQMU5JETEEg.JPEG.ros008/KakaoTalk_20180829_031555269.jpg?type=w966",
+                        .newBuilder(ContentObject.newBuilder(tvLocation.getText().toString(),
+                                postdetail.get(3),
                                 LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
                                         .setMobileWebUrl("https://developers.kakao.com").build())
-                                .setDescrption(tvLocation.getText().toString())
+                                .setDescrption(tvCamera.getText().toString())
                                 .build())
+                        .setSocial(SocialObject.newBuilder().setLikeCount(Integer.parseInt((String)tvLikeNum.getText())).build())
                         .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
                                 .setWebUrl("'https://developers.kakao.com")
                                 .setMobileWebUrl("'https://developers.kakao.com")
-                                .setAndroidExecutionParams("msg=" + "나만의 명소")
+                                .setAndroidExecutionParams("msg=" + postdetail)
                                 .setIosExecutionParams("key1=value1")
                                 .build()))
                         .build();
@@ -177,7 +179,7 @@ public class PostViewActivity extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });
 
 
         myRef.child("zzlikepeople").addChildEventListener(new ChildEventListener() {
@@ -215,6 +217,8 @@ public class PostViewActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
         ivMoon.setOnClickListener(new View.OnClickListener() {
