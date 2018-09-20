@@ -1,9 +1,13 @@
 package androidex.example.com.seoulbammmproj;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -44,9 +48,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -157,30 +167,61 @@ public class PostViewActivity extends AppCompatActivity {
 ////                                .setIosExecutionParams("key1=value1")
 ////                                .build()))
 //                        .build();
-                String templateId = "12349";
+//                String templateId = "12349";
+//
+//                Map<String, String> templateArgs = new HashMap<String, String>();
+//                templateArgs.put("location", tvLocation.getText().toString());
+//                templateArgs.put("camera", tvCamera.getText().toString());
+//                templateArgs.put("like", (String)tvLikeNum.getText());
+//                templateArgs.put("img_url", postdetail.get(3));
+//                templateArgs.put("A_E", "@string/kakao_scheme");
+//                templateArgs.put("A_M", "@string/kakaolink_host");
+//
+//                Map<String, String> serverCallbackArgs = new HashMap<String, String>();
+////                serverCallbackArgs.put("user_id", "${current_user_id}");
+////                serverCallbackArgs.put("product_id", "${shared_product_id}");
+//
+//
+//                KakaoLinkService.getInstance().sendCustom(PostViewActivity.this, templateId, templateArgs, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
+//                    @Override
+//                    public void onFailure(ErrorResult errorResult) {
+//                        Logger.e(errorResult.toString());
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(KakaoLinkResponse result) {
+//                        // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
+//                    }
+//                });
+//                Bitmap icon = mBitmap;
+//                Intent share = new Intent(Intent.ACTION_SEND);
+//                share.setType("image/jpeg");
+//
+//                ContentValues values = new ContentValues();
+//                values.put(MediaStore.Images.Media.TITLE, "title");
+//                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+//                Uri uri = getContentResolver().insert(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+//                        values);
+//
+//
+//                OutputStream outstream;
+//                try {
+//                    outstream = getContentResolver().openOutputStream(uri);
+//                    icon.compress(Bitmap.CompressFormat.JPEG, 100, outstream);
+//                    outstream.close();
+//                } catch (Exception e) {
+//                    System.err.println(e.toString());
+//                }
+//
+//                share.putExtra(Intent.EXTRA_STREAM, uri);
+//                startActivity(Intent.createChooser(share, "Share Image"));
+//            }
+                View container;
+                container = getWindow().getDecorView();
+                container.buildDrawingCache();
+                Bitmap captureView = container.getDrawingCache();
 
-                Map<String, String> templateArgs = new HashMap<String, String>();
-                templateArgs.put("location", tvLocation.getText().toString());
-                templateArgs.put("camera", tvCamera.getText().toString());
-                templateArgs.put("like", (String)tvLikeNum.getText());
-                templateArgs.put("img_url", postdetail.get(3));
-
-                Map<String, String> serverCallbackArgs = new HashMap<String, String>();
-                serverCallbackArgs.put("user_id", "${current_user_id}");
-                serverCallbackArgs.put("product_id", "${shared_product_id}");
-
-
-                KakaoLinkService.getInstance().sendCustom(PostViewActivity.this, templateId, templateArgs, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
-                    @Override
-                    public void onFailure(ErrorResult errorResult) {
-                        Logger.e(errorResult.toString());
-                    }
-
-                    @Override
-                    public void onSuccess(KakaoLinkResponse result) {
-                        // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
-                    }
-                });
+                String adress = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.seoulBammmproj/Memkey"+"capture.jpeg";
             }
         });
 
@@ -339,4 +380,56 @@ public class PostViewActivity extends AppCompatActivity {
         return strUserId;
     }
 
+    private void takeScreenshot() {
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+
+        try {
+            // image naming and path  to include sd card  appending name you choose for file
+            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+
+            // create bitmap screen capture
+            View v1 = getWindow().getDecorView().getRootView();
+            v1.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+            v1.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(mPath);
+
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+            openScreenshot(imageFile);
+        } catch (Throwable e) {
+            // Several error may come out with file handling or DOM
+            e.printStackTrace();
+        }
+    }
+    private void openScreenshot(File imageFile) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.fromFile(imageFile);
+        intent.setDataAndType(uri, "image/*");
+        startActivity(intent);
+    }
+
+    private void sendImg(){
+        Intent it3=getIntent();	//파일명을 가져오기 위한 인텐트(에디트텍스트에서 이름입력받은 걸 파일명으로 쓰기 위해)
+        String str_name=it3.getStringExtra("it3_name");	//이름을 가져온다.
+        File fileRoute = null;
+        fileRoute = Environment.getExternalStorageDirectory(); //sdcard 파일경로 선언
+        File files = new File(fileRoute,"/temp/"+str_name+"-.jpeg"); //temp폴더에 이름으로 저장된 jpeg파일 경로 선언
+        if(files.exists()==true){
+            Intent intentSend = new Intent(Intent.ACTION_SEND);
+            intentSend.setType("image/*"); //이름으로 저장된 파일의 경로를 넣어서 공유하기
+            intentSend.putExtra(Intent.EXTRA_STREAM, Uri.parse(fileRoute+"/temp/"+str_name+"-.jpeg"));
+            startActivity(Intent.createChooser(intentSend, "공유"));
+        }else{ //파일이 없다면 저장을 해달라는 토스트메세지를 띄운다.
+            Toast.makeText(getApplicationContext(), "저장을 먼저 해주세요", Toast.LENGTH_LONG).show();
+        }
+
+    }
 }
