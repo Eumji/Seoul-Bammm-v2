@@ -20,15 +20,6 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <!-- <LinearLayout
-         android:id="@+id/llPostList"
-         android:layout_width="match_parent"
-         android:layout_height="50dp"
-         android:orientation="horizontal"
-         >
-
-
-     </LinearLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPostList"
