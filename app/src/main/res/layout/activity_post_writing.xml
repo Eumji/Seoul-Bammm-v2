@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="게시글 작성"
+        android:fontFamily="@font/seoulhangang"
         android:textSize="25sp"
         android:background="#00164B"
         android:textColor="#ffffff"
@@ -44,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/hint_etLocation"
+                android:fontFamily="@font/seoulhangang"
                 android:background="@drawable/writepostbackground"/>
 
             <EditText
@@ -52,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/hint_etCamera"
+                android:fontFamily="@font/seoulhangang"
                 android:background="@drawable/writepostbackground"/>
 
         </LinearLayout>
@@ -74,6 +77,7 @@
             android:layout_height="match_parent"
             android:background="#00164B"
             android:textColor="#ffffff"
+            android:fontFamily="@font/seoulhangang"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/btnPostWriteUpload"
@@ -83,6 +87,7 @@
             android:layout_height="match_parent"
             android:background="#00164B"
             android:textColor="#ffffff"
+            android:fontFamily="@font/seoulhangang"
             android:layout_weight="1"/>
     </LinearLayout>
 
