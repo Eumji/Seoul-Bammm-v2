@@ -5,7 +5,7 @@
             "name_kor" : "노을공원",
             "location" : "서울특별시 마포구 상암동 486-6",
             "gu" : "마포구",
-            "img" : "",
+            "img" : "noeul",
             "filter" : "B612",
             "detail" : {
                 "region_detail" : "카페와 매점 뒤쪽 전망대",
@@ -17,7 +17,7 @@
             "name_kor" : "63빌딩",
             "location" : "서울특별시 영등포구 여의도동 63로 50",
             "gu" : "영등포구",
-            "img" : "",
+            "img" : "building63",
             "filter" : "SNOW",
             "detail" : {
                 "region_detail" : "63전망대",
@@ -29,7 +29,7 @@
             "name_kor" : "북악산팔각정",
             "location" : "서울특별시 종로구 평창동 산 6-17",
             "gu" : "종로구",
-            "img" : "",
+            "img" : "bukak",
             "filter" : "Candy",
             "detail" : {
                 "region_detail" : "성곽길의 정상인 백악마루",
@@ -41,7 +41,7 @@
             "name_kor" : "경복궁",
             "location" : "서울특별시 종로구 종로1.2.3.4가동 사직로 161",
             "gu" : "종로구",
-            "img" : "",
+            "img" : "kyeongbok",
             "filter" : "픽테일",
             "detail" : {
                 "region_detail" : "경회루, 근정전",

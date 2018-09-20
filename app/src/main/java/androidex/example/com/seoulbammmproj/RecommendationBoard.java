@@ -164,7 +164,7 @@ public class RecommendationBoard  extends AppCompatActivity {
             public void onClick(View view) {
                 FeedTemplate params = FeedTemplate
                         .newBuilder(ContentObject.newBuilder(name_kor.getText().toString(),
-                                "https://postfiles.pstatic.net/MjAxODA4MjlfMjU5/MDAxNTM1NDgwMTc3MDYy.fwN6Pzslx7OSB1AoCnND5pPy3sqSj20EY7HB4SHey-Eg._3tY4q-wu4JcICqSY5lkx0DpYal2qt-LhZQMU5JETEEg.JPEG.ros008/KakaoTalk_20180829_031555269.jpg?type=w966",
+                                "https://github.com/Eumji/Seoul-Bammm-v2/blob/master/app/src/main/res/drawable/Seoul_bam_kakako.png?raw=true",
                                 LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
                                         .setMobileWebUrl("https://developers.kakao.com").build())
                                 .setDescrption(explanation.getText().toString())
