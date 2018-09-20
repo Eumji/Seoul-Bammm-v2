@@ -29,6 +29,7 @@
         android:text="서울의 야경명소 열세곳"
         android:textColor="#ffffff"
         android:textSize="30dp"
+        android:fontFamily="@font/seoulhangang"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="56dp" />
 
