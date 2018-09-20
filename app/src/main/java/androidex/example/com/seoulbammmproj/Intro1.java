@@ -8,6 +8,8 @@ import android.view.WindowManager;
 
 public class Intro1 extends AppCompatActivity {
 
+    // 시작 화면 띄우는 activity
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
