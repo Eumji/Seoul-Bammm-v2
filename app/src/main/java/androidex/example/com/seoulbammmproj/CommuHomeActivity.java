@@ -93,7 +93,7 @@ public class CommuHomeActivity extends AppCompatActivity {
                 loadNextDataFromApi(page);
             }
         };*/
-        scrollListener = new RecyclerView.OnScrollListener() {
+        /*scrollListener = new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (!mRecyclerView.canScrollVertically(-1)) {
@@ -106,7 +106,7 @@ public class CommuHomeActivity extends AppCompatActivity {
                 }
             }
         };
-        mRecyclerView.addOnScrollListener(scrollListener);
+        mRecyclerView.addOnScrollListener(scrollListener);*/
 
         postsList = new ArrayList<>();
         mAdapter = new PostListAdapter(postsList, width, height);

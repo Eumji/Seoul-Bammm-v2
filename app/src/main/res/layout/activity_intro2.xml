@@ -25,7 +25,9 @@
         android:id="@+id/iv_best"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:background="@drawable/loading"
+        />
 
     <TextView
         android:layout_centerHorizontal="true"
