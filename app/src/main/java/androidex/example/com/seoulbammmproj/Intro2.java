@@ -25,7 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Intro2 extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class Intro2 extends AppCompatActivity {
     private final int REQ_HEIGHT = 1080;
     int width, height;
     int postsize, randPostNum;
+    String currentDate;
     ArrayList<Post> postsList;
 
     RelativeLayout ll = null;
@@ -51,9 +54,13 @@ public class Intro2 extends AppCompatActivity {
         ll = findViewById(R.id.ll_intro2);
         iv = findViewById(R.id.iv_best);
 
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = df.format(c.getTime());
+
         postsList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("posts");
+        myRef = database.getReference("posts").child(currentDate);
 
         runOnUiThread(new Runnable() {
             @Override

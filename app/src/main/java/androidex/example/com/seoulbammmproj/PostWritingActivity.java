@@ -223,6 +223,7 @@ public class PostWritingActivity extends AppCompatActivity {
                             myRef.setValue(posts);
                             myRef.child("zzlikepeople").child("0").setValue("");
 
+
                             pbPostUpload.setVisibility(View.INVISIBLE);
                             Toast.makeText(PostWritingActivity.this, "업로드 완료! 새로고침 버튼을 눌러주세요~", Toast.LENGTH_SHORT).show();
                             finish();
