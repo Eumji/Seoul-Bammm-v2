@@ -52,9 +52,6 @@
             android:name=".RecommendationMenu"
             android:label="RecommendationMenu" />
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
 
         <activity android:name=".LoginActivity" />
         <activity android:name=".CommuHomeActivity" />
@@ -62,6 +59,10 @@
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".PostViewActivity">
         </activity>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
     </application>
 
 </manifest>
