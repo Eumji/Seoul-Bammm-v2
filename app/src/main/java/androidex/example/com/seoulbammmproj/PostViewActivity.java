@@ -174,13 +174,6 @@ public class PostViewActivity extends AppCompatActivity {
                                 .setIosExecutionParams("key1=value1")
                                 .build()))
                         .build();
-//                String templateId = "12349";
-//
-//                Map<String, String> templateArgs = new HashMap<String, String>();
-//                templateArgs.put("location", tvLocation.getText().toString());
-//                templateArgs.put("camera", tvCamera.getText().toString());
-//                templateArgs.put("like", (String) tvLikeNum.getText());
-//                templateArgs.put("img_url", postdetail.get(3));
 
                 Map<String, String> serverCallbackArgs = new HashMap<String, String>();
                 serverCallbackArgs.put("user_id", "${current_user_id}");
