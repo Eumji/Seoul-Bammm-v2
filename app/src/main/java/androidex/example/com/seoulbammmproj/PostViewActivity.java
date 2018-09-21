@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -34,6 +36,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.message.template.ButtonObject;
@@ -85,6 +89,7 @@ public class PostViewActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
+    StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -365,9 +370,22 @@ public class PostViewActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (post.getUid().equals(currentUid)) {
-                            myRef.removeValue();
-                            Toast.makeText(PostViewActivity.this, "삭제 완료~!", Toast.LENGTH_SHORT).show();
-                            finish();
+                            mStorageRef = FirebaseStorage.getInstance().getReference().child("posts").child(post.getDate().split(";;")[0]).child(post.getDate().split(";;")[1] + "_" + post.getUid() + ".jpg");;
+                            mStorageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    myRef.removeValue();
+                                    Toast.makeText(PostViewActivity.this, "삭제 완료~!", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(PostViewActivity.this, "삭제 실패ㅠㅠ", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         } else {
                             Toast.makeText(PostViewActivity.this, "직접 쓴 게시글만 삭제할 수 있어요!", Toast.LENGTH_SHORT).show();
                         }

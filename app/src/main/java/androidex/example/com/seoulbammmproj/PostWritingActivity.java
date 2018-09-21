@@ -179,7 +179,7 @@ public class PostWritingActivity extends AppCompatActivity {
         if (bitmap == null) {
             Toast.makeText(this, "사진이 필요해요~", Toast.LENGTH_SHORT).show();
         } else {
-            StorageReference mountainsRef = mStorageRef.child("posts").child(currentDate + "_" + strUid + ".jpg");
+            StorageReference mountainsRef = mStorageRef.child("posts").child(todayDate).child(currentTime + "_" + strUid + ".jpg");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
