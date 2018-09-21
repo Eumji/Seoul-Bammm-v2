@@ -67,7 +67,7 @@ import java.util.Map;
 public class PostViewActivity extends AppCompatActivity {
     final static String TAG = "PostViewActivityyy";
 
-    String postDate;
+    String postDate, postTime;
     String strUserId, strLikeNum, currentUid;
     ArrayList<String> postdetail, likePeople;
     Post post = new Post();
@@ -109,7 +109,8 @@ public class PostViewActivity extends AppCompatActivity {
         tvLocation = findViewById(R.id.explanation);
         share_btn = findViewById(R.id.share_btn);
 
-        postDate = getIntent().getStringExtra("date");
+        postDate = getIntent().getStringExtra("day");
+        postTime = getIntent().getStringExtra("time");
         Log.d(TAG, "onCreate: " + postDate);
         postdetail = new ArrayList<>();
         likePeople = new ArrayList<>();
@@ -118,7 +119,7 @@ public class PostViewActivity extends AppCompatActivity {
         currentUid = user.getUid();
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("posts").child(postDate);
+        myRef = database.getReference("posts").child(postDate).child(postTime);
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -165,7 +166,7 @@ public class PostViewActivity extends AppCompatActivity {
                                         .setMobileWebUrl("https://developers.kakao.com").build())
                                 .setDescrption(tvCamera.getText().toString())
                                 .build())
-                        .setSocial(SocialObject.newBuilder().setLikeCount(Integer.parseInt((String)tvLikeNum.getText())).build())
+                        .setSocial(SocialObject.newBuilder().setLikeCount(Integer.parseInt((String) tvLikeNum.getText())).build())
 //                        .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
 //                                .setWebUrl("'https://developers.kakao.com")
 //                                .setMobileWebUrl("'https://developers.kakao.com")
@@ -178,7 +179,7 @@ public class PostViewActivity extends AppCompatActivity {
                 Map<String, String> templateArgs = new HashMap<String, String>();
                 templateArgs.put("location", tvLocation.getText().toString());
                 templateArgs.put("camera", tvCamera.getText().toString());
-                templateArgs.put("like", (String)tvLikeNum.getText());
+                templateArgs.put("like", (String) tvLikeNum.getText());
                 templateArgs.put("img_url", postdetail.get(3));
 
                 Map<String, String> serverCallbackArgs = new HashMap<String, String>();
@@ -204,7 +205,7 @@ public class PostViewActivity extends AppCompatActivity {
                 container.buildDrawingCache();
                 Bitmap captureView = container.getDrawingCache();
 
-                if(grantExternalStoragePermission()==true) {
+                if (grantExternalStoragePermission() == true) {
                     String adress = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/" + "capture.jpeg";
 
                     Log.d("capture", adress);
@@ -221,9 +222,8 @@ public class PostViewActivity extends AppCompatActivity {
                     Intent shareintent = new Intent(Intent.ACTION_SEND);
                     shareintent.putExtra(Intent.EXTRA_STREAM, uri);
                     shareintent.setType("image/*");
-                    startActivity(Intent.createChooser(shareintent,"공유"));
-                }
-                else{
+                    startActivity(Intent.createChooser(shareintent, "공유"));
+                } else {
                     Log.d("permission", "denied");
                     AlertDialog.Builder popupCancel = new AlertDialog.Builder(PostViewActivity.this);
                     popupCancel.setMessage("사진 공유에 실패하셨습니다ㅠㅠ");
@@ -270,8 +270,6 @@ public class PostViewActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
         ivMoon.setOnClickListener(new View.OnClickListener() {
@@ -359,14 +357,14 @@ public class PostViewActivity extends AppCompatActivity {
             }
         });
     }
-    
-    private void deletePost(){
+
+    private void deletePost() {
         AlertDialog.Builder popupCancel = new AlertDialog.Builder(PostViewActivity.this);
         popupCancel.setMessage("정말 삭제하시겠어요?")
                 .setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if(post.getUid().equals(currentUid)){
+                        if (post.getUid().equals(currentUid)) {
                             myRef.removeValue();
                             Toast.makeText(PostViewActivity.this, "삭제 완료~!", Toast.LENGTH_SHORT).show();
                             finish();
@@ -393,15 +391,15 @@ public class PostViewActivity extends AppCompatActivity {
     private boolean grantExternalStoragePermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
+                Log.v(TAG, "Permission is granted");
                 return true;
-            }else{
-                Log.v(TAG,"Permission is revoked");
+            } else {
+                Log.v(TAG, "Permission is revoked");
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
                 return false;
             }
-        }else{
+        } else {
             Toast.makeText(this, "External Storage Permission is Grant", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "External Storage Permission is Grant ");
             return true;

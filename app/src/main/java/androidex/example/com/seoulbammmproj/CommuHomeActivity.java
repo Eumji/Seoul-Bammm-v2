@@ -28,7 +28,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class CommuHomeActivity extends AppCompatActivity {
 
@@ -44,6 +46,7 @@ public class CommuHomeActivity extends AppCompatActivity {
     int height, width;
     public int flagRefresh; // 0이면 새로고침, 1이면 X
     public static boolean flagFirstLoad;
+    String currentDate;
 
     private int previousTotal = 0;
     private boolean loading = true;
@@ -108,12 +111,16 @@ public class CommuHomeActivity extends AppCompatActivity {
         };
         mRecyclerView.addOnScrollListener(scrollListener);*/
 
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = df.format(c.getTime());
+
         postsList = new ArrayList<>();
         mAdapter = new PostListAdapter(postsList, width, height);
         mRecyclerView.setAdapter(mAdapter);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("posts");
+        myRef = database.getReference("posts").child(currentDate);
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -274,7 +281,10 @@ public class CommuHomeActivity extends AppCompatActivity {
 
     public void viewPostDetail(String date) {
         Intent intent = new Intent(CommuHomeActivity.this, PostViewActivity.class);
-        intent.putExtra("date", date);
+        String day = date.split(";;")[0];
+        String time = date.split(";;")[1];
+        intent.putExtra("day", day);
+        intent.putExtra("time",time);
         startActivity(intent);
     }
 
