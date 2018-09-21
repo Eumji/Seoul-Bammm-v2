@@ -46,7 +46,7 @@ public class RecommendationBoard  extends AppCompatActivity {
     ImageView share_btn;
 
     TextView moon_num;
-    TextView name_kor, gu, filter, region_detail, explanation;
+    TextView name_kor, gu, region_detail, explanation;
 
     int click_num = 0;
 
@@ -71,7 +71,6 @@ public class RecommendationBoard  extends AppCompatActivity {
         img = findViewById(R.id.img);
         name_kor = findViewById(R.id.name_kor);
         gu = findViewById(R.id.gu);
-        filter = findViewById(R.id.filter);
         region_detail = findViewById(R.id.region_detail);
         explanation = findViewById(R.id.explanation);
         share_btn = findViewById(R.id.share_btn);
@@ -118,9 +117,6 @@ public class RecommendationBoard  extends AppCompatActivity {
                         Log.i(TAG, "_img : " + _img);
                         //
 
-                        final String _filter = jsonObject1.getString("filter");
-                        Log.i(TAG, "_filter : " + _filter);
-
                         JSONObject jsonObject2 = jsonObject1.getJSONObject("detail");
                         final String _region_detail = jsonObject2.getString("region_detail");
                         Log.i(TAG, "_region_detail : " + _region_detail);
@@ -134,7 +130,6 @@ public class RecommendationBoard  extends AppCompatActivity {
                                 img.setImageResource(redID);
                                 name_kor.setText(_name_kor);
                                 gu.setText(_gu);
-                                filter.setText(_filter);
                                 region_detail.setText(_region_detail);
                                 explanation.setText(_explanation);
                             }
@@ -164,7 +159,7 @@ public class RecommendationBoard  extends AppCompatActivity {
             public void onClick(View view) {
                 FeedTemplate params = FeedTemplate
                         .newBuilder(ContentObject.newBuilder(name_kor.getText().toString(),
-                                "https://github.com/Eumji/Seoul-Bammm-v2/blob/master/app/src/main/res/drawable/Seoul_bam_kakako.png?raw=true",
+                                "https://postfiles.pstatic.net/MjAxODA5MjBfMjcx/MDAxNTM3NDI5ODk1OTIw.CBfFHdRT8tBqiqoU6SHBpMeexQvVQJd3FiJwV8qNhSIg.MFR0ZFvHglk-0u66lByBP3ZIOWa-Q1wCZMAAVQQk7QAg.PNG.ros008/1537429880238.png?type=w966",
                                 LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
                                         .setMobileWebUrl("https://developers.kakao.com").build())
                                 .setDescrption(explanation.getText().toString())
@@ -268,9 +263,6 @@ public class RecommendationBoard  extends AppCompatActivity {
                         Log.i(TAG, "_img : " + _img);
                         //
 
-                        final String _filter = jsonObject1.getString("filter");
-                        Log.i(TAG, "_filter : " + _filter);
-
                         JSONObject jsonObject2 = jsonObject1.getJSONObject("detail");
                         final String _region_detail = jsonObject2.getString("region_detail");
                         Log.i(TAG, "_region_detail : " + _region_detail);
@@ -284,7 +276,6 @@ public class RecommendationBoard  extends AppCompatActivity {
                                 img.setImageResource(redID);
                                 name_kor.setText(_name_kor);
                                 gu.setText(_gu);
-                                filter.setText(_filter);
                                 region_detail.setText(_region_detail);
                                 explanation.setText(_explanation);
                             }

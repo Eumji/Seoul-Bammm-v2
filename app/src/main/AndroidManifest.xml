@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -35,7 +36,7 @@
             android:label="ConstellationMenu" />
         <activity android:name=".RecommendationBoard">
             <intent-filter>
-                <!--<action android:name="android.intent.action.VIEW" />-->
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -57,7 +58,18 @@
         <activity android:name=".CommuHomeActivity" />
         <activity android:name=".PostWritingActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity android:name=".PostViewActivity"/>
+        <activity android:name=".PostViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
