@@ -167,27 +167,27 @@ public class PostViewActivity extends AppCompatActivity {
                                 .setDescrption(tvCamera.getText().toString())
                                 .build())
                         .setSocial(SocialObject.newBuilder().setLikeCount(Integer.parseInt((String) tvLikeNum.getText())).build())
-//                        .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
-//                                .setWebUrl("'https://developers.kakao.com")
-//                                .setMobileWebUrl("'https://developers.kakao.com")
-//                                .setAndroidExecutionParams("msg=" + postdetail)
-//                                .setIosExecutionParams("key1=value1")
-//                                .build()))
+                        .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
+                                .setWebUrl("'https://developers.kakao.com")
+                                .setMobileWebUrl("'https://developers.kakao.com")
+                                .setAndroidExecutionParams("msg=" + "2"+postDate+";;"+postTime)
+                                .setIosExecutionParams("key1=value1")
+                                .build()))
                         .build();
-                String templateId = "12349";
-
-                Map<String, String> templateArgs = new HashMap<String, String>();
-                templateArgs.put("location", tvLocation.getText().toString());
-                templateArgs.put("camera", tvCamera.getText().toString());
-                templateArgs.put("like", (String) tvLikeNum.getText());
-                templateArgs.put("img_url", postdetail.get(3));
+//                String templateId = "12349";
+//
+//                Map<String, String> templateArgs = new HashMap<String, String>();
+//                templateArgs.put("location", tvLocation.getText().toString());
+//                templateArgs.put("camera", tvCamera.getText().toString());
+//                templateArgs.put("like", (String) tvLikeNum.getText());
+//                templateArgs.put("img_url", postdetail.get(3));
 
                 Map<String, String> serverCallbackArgs = new HashMap<String, String>();
-//                serverCallbackArgs.put("user_id", "${current_user_id}");
-//                serverCallbackArgs.put("product_id", "${shared_product_id}");
+                serverCallbackArgs.put("user_id", "${current_user_id}");
+                serverCallbackArgs.put("product_id", "${shared_product_id}");
 
 
-                KakaoLinkService.getInstance().sendCustom(PostViewActivity.this, templateId, templateArgs, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
+                KakaoLinkService.getInstance().sendDefault(PostViewActivity.this, params, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
                     @Override
                     public void onFailure(ErrorResult errorResult) {
                         Logger.e(errorResult.toString());
@@ -198,40 +198,6 @@ public class PostViewActivity extends AppCompatActivity {
                         // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
                     }
                 });
-
-                //사진 캡처해서 공유하기
-                View container;
-                container = getWindow().getDecorView();
-                container.buildDrawingCache();
-                Bitmap captureView = container.getDrawingCache();
-
-                if(grantExternalStoragePermission()==true) {
-                    String adress = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/" + "capture.jpeg";
-
-                    Log.d("capture", adress);
-                    FileOutputStream fos;
-                    try {
-                        fos = new FileOutputStream(adress);
-                        captureView.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                        Log.d("jpg", "put jpg");
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                    Uri uri = Uri.fromFile(new File(adress));
-                    Intent shareintent = new Intent(Intent.ACTION_SEND);
-                    shareintent.putExtra(Intent.EXTRA_STREAM, uri);
-                    shareintent.setType("image/*");
-                    startActivity(Intent.createChooser(shareintent,"공유"));
-                }
-                else{
-                    Log.d("permission", "denied");
-                    AlertDialog.Builder popupCancel = new AlertDialog.Builder(PostViewActivity.this);
-                    popupCancel.setMessage("사진 공유에 실패하셨습니다ㅠㅠ");
-
-                }
-
-
             }
         });
 

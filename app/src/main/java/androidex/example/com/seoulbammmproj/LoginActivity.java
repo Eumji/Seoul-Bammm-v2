@@ -127,10 +127,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             else{
                 Log.d("share", "login, share");
-                Intent intent = new Intent(LoginActivity.this, PostViewActivity.class);
-                intent.putExtra("date", postDate);
-                startActivity(intent);
-                finish();
+                viewPostDetail(postDate);
             }
         }
     }
@@ -220,5 +217,15 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void viewPostDetail(String date) {
+        Intent intent = new Intent(LoginActivity.this, PostViewActivity.class);
+        String day = date.split(";;")[0];
+        String time = date.split(";;")[1];
+        intent.putExtra("day", day);
+        intent.putExtra("time",time);
+        startActivity(intent);
+        finish();
     }
 }
