@@ -51,6 +51,7 @@ public class PostWritingActivity extends AppCompatActivity {
     Uri downloadUri;
     Bitmap bitmap;
     String strEmail, strName, strUid, strImage, strLocation, strCamera, currentDate;
+    String todayDate, currentTime;
     FirebaseDatabase database;
     StorageReference mStorageRef;
 
@@ -122,20 +123,19 @@ public class PostWritingActivity extends AppCompatActivity {
 
                                 // 업로드 시간
                                 Calendar c = Calendar.getInstance();
-                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd;HH;mm;ss");
+                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd;;HH;mm;ss");
                                 currentDate = df.format(c.getTime());
+                                todayDate = currentDate.split(";;")[0];
+                                currentTime = currentDate.split(";;")[1];
 
                                 // 장소와 카메라
                                 strLocation = etLocation.getText().toString();
                                 strCamera = etCamera.getText().toString();
 
 
-                                Log.d(TAG, "strEmail :  " + strEmail);
-                                Log.d(TAG, "strName :  " + strName);
-                                Log.d(TAG, "strUid :  " + strUid);
-                                Log.d(TAG, "currentDate :  " + currentDate);
-                                Log.d(TAG, "strLocation :  " + strLocation);
-                                Log.d(TAG, "strCamera :  " + strCamera);
+                                Log.d(TAG, "todayDate :  " + todayDate);
+                                Log.d(TAG, "currentTime :  " + currentTime);
+
 
                                 if (TextUtils.isEmpty(strLocation)||TextUtils.isEmpty(strCamera)){
                                     Toast.makeText(PostWritingActivity.this, "빈칸을 모두 채워주세요~", Toast.LENGTH_SHORT).show();
@@ -207,7 +207,7 @@ public class PostWritingActivity extends AppCompatActivity {
 
                             // 데이터베이스 불러오기
                             database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("posts").child(currentDate);
+                            DatabaseReference myRef = database.getReference("posts").child(todayDate).child(currentTime);
 
                             // 데이터 업로드
                             Hashtable<String, String> posts = new Hashtable<>();
