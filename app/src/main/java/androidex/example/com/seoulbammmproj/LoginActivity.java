@@ -118,9 +118,17 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) { // 만약 로그인이 되어있으면 다음 액티비티 실행
-            Intent intent = new Intent(getApplicationContext(), CommuHomeActivity.class);
-            startActivity(intent);
-            finish();
+            String postDate = getIntent().getStringExtra("date");
+            if(postDate==null) {
+                Log.d("share", "login, not share");
+                Intent intent = new Intent(getApplicationContext(), CommuHomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Log.d("share", "login, share");
+                viewPostDetail(postDate);
+            }
         }
     }
 
@@ -133,12 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Intent intent = new Intent(getApplicationContext(), CommuHomeActivity.class);
-                            //Intent intent = new Intent(getApplicationContext(), PostWritingActivity.class);
-                            startActivity(intent);
-                            finish();
-                            Log.d(TAG, "signInWithCredential:success");
+                            onStart();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -208,5 +211,15 @@ public class LoginActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void viewPostDetail(String date) {
+        Intent intent = new Intent(LoginActivity.this, PostViewActivity.class);
+        String day = date.split(";;")[0];
+        String time = date.split(";;")[1];
+        intent.putExtra("day", day);
+        intent.putExtra("time",time);
+        startActivity(intent);
+        finish();
     }
 }

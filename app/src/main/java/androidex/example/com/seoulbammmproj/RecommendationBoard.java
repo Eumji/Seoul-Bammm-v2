@@ -75,84 +75,93 @@ public class RecommendationBoard  extends AppCompatActivity {
         explanation = findViewById(R.id.explanation);
         share_btn = findViewById(R.id.share_btn);
 
-        Uri uri = getIntent().getData();
-
-        if(uri != null){
-            String msg = uri.getQueryParameter("msg");
-            InputStream is = getResources().openRawResource(R.raw.region_data);
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader reader = new BufferedReader(isr);
-
-            StringBuffer sb = new StringBuffer();
-            String line = null;
-            try {
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                Log.i(TAG, "sb : " + sb.toString());
-
-                JSONObject jsonObject = new JSONObject(sb.toString());
-                JSONArray jsonArray = new JSONArray(jsonObject.getString("region_info"));
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
-                    String _name = jsonObject1.getString("name");
-                    Log.i(TAG, "_name : " + _name);
-
-                    final String _name_kor = jsonObject1.getString("name_kor");
-                    Log.i(TAG, "_name_kor : " + _name_kor);
-
-                    if (!msg.equals(_name_kor)) {
-                        continue;
-                    } else {
-                        _location = jsonObject1.getString("location");
-                        Log.i(TAG, "_location : " + _location);
-
-                        final String _gu = jsonObject1.getString("gu");
-                        Log.i(TAG, "_gu : " + _gu);
-
-                        final String _img = "@drawable/"+jsonObject1.getString("img");
-
-                        final int redID = getResources().getIdentifier(_img, "drawble", getPackageName());
-                        Log.i(TAG, "_img : " + _img);
-                        //
-
-                        JSONObject jsonObject2 = jsonObject1.getJSONObject("detail");
-                        final String _region_detail = jsonObject2.getString("region_detail");
-                        Log.i(TAG, "_region_detail : " + _region_detail);
-
-                        final String _explanation = jsonObject2.getString("explanation");
-                        Log.i(TAG, "_explanation : " + _explanation);
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img.setImageResource(redID);
-                                name_kor.setText(_name_kor);
-                                gu.setText(_gu);
-                                region_detail.setText(_region_detail);
-                                explanation.setText(_explanation);
-                            }
-                        });
-                        break;
-                    }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (reader != null)
-                        reader.close();
-                    if (isr != null)
-                        isr.close();
-                    if (is != null)
-                        is.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
-            }
-        }
+//        Uri uri = getIntent().getData();
+//
+//        if(uri != null){
+//            String msg = uri.getQueryParameter("msg");
+//            Log.d("recommend_param", "?????");
+//            if(msg.equals("goMain")){
+//                Log.d("recommend_param", "1");
+//                Intent intent_commu_menu = new Intent(RecommendationBoard.this,LoginActivity.class);
+//                startActivity(intent_commu_menu);
+//            }
+//            else {
+//                Log.d("recommend_param", "2");
+//                InputStream is = getResources().openRawResource(R.raw.region_data);
+//                InputStreamReader isr = new InputStreamReader(is);
+//                BufferedReader reader = new BufferedReader(isr);
+//
+//                StringBuffer sb = new StringBuffer();
+//                String line = null;
+//                try {
+//                    while ((line = reader.readLine()) != null) {
+//                        sb.append(line);
+//                    }
+//                    Log.i(TAG, "sb : " + sb.toString());
+//
+//                    JSONObject jsonObject = new JSONObject(sb.toString());
+//                    JSONArray jsonArray = new JSONArray(jsonObject.getString("region_info"));
+//
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(i);
+//                        String _name = jsonObject1.getString("name");
+//                        Log.i(TAG, "_name : " + _name);
+//
+//                        final String _name_kor = jsonObject1.getString("name_kor");
+//                        Log.i(TAG, "_name_kor : " + _name_kor);
+//
+//                        if (!msg.equals(_name_kor)) {
+//                            continue;
+//                        } else {
+//                            _location = jsonObject1.getString("location");
+//                            Log.i(TAG, "_location : " + _location);
+//
+//                            final String _gu = jsonObject1.getString("gu");
+//                            Log.i(TAG, "_gu : " + _gu);
+//
+//                            final String _img = "@drawable/" + jsonObject1.getString("img");
+//
+//                            final int redID = getResources().getIdentifier(_img, "drawble", getPackageName());
+//                            Log.i(TAG, "_img : " + _img);
+//                            //
+//
+//                            JSONObject jsonObject2 = jsonObject1.getJSONObject("detail");
+//                            final String _region_detail = jsonObject2.getString("region_detail");
+//                            Log.i(TAG, "_region_detail : " + _region_detail);
+//
+//                            final String _explanation = jsonObject2.getString("explanation");
+//                            Log.i(TAG, "_explanation : " + _explanation);
+//
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    img.setImageResource(redID);
+//                                    name_kor.setText(_name_kor);
+//                                    gu.setText(_gu);
+//                                    region_detail.setText(_region_detail);
+//                                    explanation.setText(_explanation);
+//                                }
+//                            });
+//                            break;
+//                        }
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    try {
+//                        if (reader != null)
+//                            reader.close();
+//                        if (isr != null)
+//                            isr.close();
+//                        if (is != null)
+//                            is.close();
+//                    } catch (Exception e2) {
+//                        e2.printStackTrace();
+//                    }
+//                }
+//            }
+//        }
 
         share_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +176,7 @@ public class RecommendationBoard  extends AppCompatActivity {
                         .addButton(new ButtonObject("앱에서 보기", LinkObject.newBuilder()
                                 .setWebUrl("'https://developers.kakao.com")
                                 .setMobileWebUrl("'https://developers.kakao.com")
-                                .setAndroidExecutionParams("msg="+name_kor.getText().toString())
+                                .setAndroidExecutionParams("msg="+"1"+region)
                                 .setIosExecutionParams("key1=value1")
                                 .build()))
                         .build();
@@ -222,9 +231,10 @@ public class RecommendationBoard  extends AppCompatActivity {
     public class PopIntent extends Thread {
         @Override
         public void run() {
+            Log.d("recommend_param", "here");
             Intent intent = getIntent();
             region = intent.getStringExtra("region");
-
+            Log.d("recommend_param", region);
             InputStream is = getResources().openRawResource(R.raw.region_data);
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader reader = new BufferedReader(isr);

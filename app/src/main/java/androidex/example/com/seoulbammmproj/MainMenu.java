@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -28,8 +29,32 @@ public class MainMenu extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Intent intent_intro1 = new Intent(MainMenu.this, Intro1.class);
-        startActivity(intent_intro1);
+
+
+        Uri uri = getIntent().getData();
+
+        if(uri != null) {
+            String msg = uri.getQueryParameter("msg");
+            Log.d("share", msg);
+            if (msg.charAt(0) == '1') {
+                msg = msg.substring(1);
+                Intent i = new Intent(this, RecommendationBoard.class);
+                i.putExtra("region", msg);
+                startActivity(i);
+                finish();
+            } else if (msg.charAt(0) == '2') {
+                msg = msg.substring(1);
+                Intent intent = new Intent(MainMenu.this, LoginActivity.class);
+                intent.putExtra("date", msg);
+                startActivity(intent);
+                finish();
+            }
+        }
+
+        else{
+            Intent intent_intro1 = new Intent(MainMenu.this, Intro1.class);
+            startActivity(intent_intro1);
+        }
 
 
         btn_menu1 = findViewById(R.id.btn_main_menu01);
