@@ -1,6 +1,5 @@
 package androidex.example.com.seoulbammmproj;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Handler;
@@ -16,10 +15,8 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -50,22 +47,11 @@ public class CommuHomeActivity extends AppCompatActivity {
     String currentDate;
     String viewFlag;
 
-    private int previousTotal = 0;
-    private boolean loading = true;
-    private int visibleThreshold = 5;
-    int firstVisibleItem, visibleItemCount, totalItemCount;
-    int visiblePosts = 0;
-    final int VISIBLE_PLUS = 5;
-
-    //private EndlessRecyclerViewScrollListener scrollListener;
-    private RecyclerView.OnScrollListener scrollListener;
-
     ImageView ivAddPost, ivReFresh;
     Toolbar toolbar = null;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
-    //Query mNewPostsQuery;
 
     Display display;
     Point size;
@@ -87,7 +73,6 @@ public class CommuHomeActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.rvPostList);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(CommuHomeActivity.this);
-        //mLayoutManager = new GridLayoutManager(CommuHomeActivity.this, 2);
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -130,11 +115,10 @@ public class CommuHomeActivity extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             currentDate = df.format(c.getTime());
 
+            // 버튼 안보이게
             ivAddPost.setImageResource(R.drawable.nothingbtn);
             ivReFresh.setImageResource(R.drawable.nothingbtn);
         }
-
-
 
         postsList = new ArrayList<>();
         mAdapter = new PostListAdapter(postsList, width, height);
@@ -193,57 +177,18 @@ public class CommuHomeActivity extends AppCompatActivity {
             }
         });
 
-        /*visiblePosts += VISIBLE_PLUS;
-                mNewPostsQuery = myRef.limitToLast(visiblePosts);
-                Log.d("CommuHommmmm", "visiblePosts : " + visiblePosts);
-                mNewPostsQuery.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        Post post = dataSnapshot.getValue(Post.class);
-                postsList.add(post);
-                Log.d(TAG, post.toString());
-                posting(postsList.size());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
-
-    }
+    } //onCreate()
 
     public void posting(int size) {
         if (flagRefresh == 0) {
             mRecyclerView.scrollToPosition(size - 1);
             mAdapter.notifyItemChanged(size - 1);
         }
-    }
-
-    public void loadNextDataFromApi() {
-
     }
 
     public void signOut() {
@@ -290,6 +235,7 @@ public class CommuHomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // 어제의 서울 피드 열기
     private void viewYesterdayFeed(){
         if (viewFlag.equals("today")){
             Intent intent = new Intent(CommuHomeActivity.this,CommuHomeActivity.class);
