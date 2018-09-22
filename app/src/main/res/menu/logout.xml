@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/itemYesterday"
+        android:title="어제의 서울"
+        />
     <item
         android:id="@+id/itemSignOut"
         android:title="로그아웃"
-        app:showAsAction="never"
         />
 
 </menu>

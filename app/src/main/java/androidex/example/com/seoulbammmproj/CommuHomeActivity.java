@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class CommuHomeActivity extends AppCompatActivity {
 
@@ -47,6 +48,7 @@ public class CommuHomeActivity extends AppCompatActivity {
     public int flagRefresh; // 0이면 새로고침, 1이면 X
     public static boolean flagFirstLoad;
     String currentDate;
+    String viewFlag;
 
     private int previousTotal = 0;
     private boolean loading = true;
@@ -89,31 +91,50 @@ public class CommuHomeActivity extends AppCompatActivity {
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        /*scrollListener = new EndlessRecyclerViewScrollListener(mLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                Log.d("CommuHommmmm", "onLoadMore: Scrolled~~~");
-                loadNextDataFromApi(page);
-            }
-        };*/
-        /*scrollListener = new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (!mRecyclerView.canScrollVertically(-1)) {
-                    Log.d(TAG, "Top of List");
-                } else if (!mRecyclerView.canScrollVertically(1)) {
-                    Log.d(TAG, "End of List");
-                    loadNextDataFromApi();
-                } else {
-                    Log.d(TAG, "idle");
-                }
-            }
-        };
-        mRecyclerView.addOnScrollListener(scrollListener);*/
+        ivAddPost = findViewById(R.id.btnAddPost);
+        ivReFresh = findViewById(R.id.btnReFresh);
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        currentDate = df.format(c.getTime());
+        viewFlag = getIntent().getStringExtra("commu");
+        if(viewFlag.equals("today")){
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            currentDate = df.format(c.getTime());
+
+            //글 추가와 새로고침은 오늘만 가능
+            ivAddPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(CommuHomeActivity.this, PostWritingActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            ivReFresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    flagRefresh = 0;
+                    posting(postsList.size());
+                    Log.d(TAG, "Refresh Button is pushed. Then flag = " + flagRefresh);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            flagRefresh = 1;
+                            Log.d(TAG, "3초 지남. flag가 1로 다시 세팅. flag = " + flagRefresh);
+                        }
+                    }, 3000);
+                }
+            });
+        } else if (viewFlag.equals("yesterday")){
+            Calendar c = new GregorianCalendar();
+            c.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            currentDate = df.format(c.getTime());
+
+            ivAddPost.setImageResource(R.drawable.nothingbtn);
+            ivReFresh.setImageResource(R.drawable.nothingbtn);
+        }
+
+
 
         postsList = new ArrayList<>();
         mAdapter = new PostListAdapter(postsList, width, height);
@@ -211,31 +232,6 @@ public class CommuHomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        ivAddPost = findViewById(R.id.btnAddPost);
-        ivAddPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CommuHomeActivity.this, PostWritingActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        ivReFresh = findViewById(R.id.btnReFresh);
-        ivReFresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flagRefresh = 0;
-                posting(postsList.size());
-                Log.d(TAG, "Refresh Button is pushed. Then flag = " + flagRefresh);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        flagRefresh = 1;
-                        Log.d(TAG, "3초 지남. flag가 1로 다시 세팅. flag = " + flagRefresh);
-                    }
-                }, 3000);
-            }
-        });
 
     }
 
@@ -261,8 +257,11 @@ public class CommuHomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //return super.onCreateOptionsMenu(logout);
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.logout, menu);
+        if(viewFlag.equals("today")){
+            MenuInflater menuInflater = getMenuInflater();
+            menuInflater.inflate(R.menu.logout, menu);
+            return true;
+        }
         return true;
     }
 
@@ -275,6 +274,9 @@ public class CommuHomeActivity extends AppCompatActivity {
             case R.id.itemSignOut:
                 signOut();
                 return true;
+            case R.id.itemYesterday:
+                viewYesterdayFeed();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -286,6 +288,15 @@ public class CommuHomeActivity extends AppCompatActivity {
         intent.putExtra("day", day);
         intent.putExtra("time",time);
         startActivity(intent);
+    }
+
+    private void viewYesterdayFeed(){
+        if (viewFlag.equals("today")){
+            Intent intent = new Intent(CommuHomeActivity.this,CommuHomeActivity.class);
+            intent.putExtra("commu","yesterday");
+            startActivity(intent);
+        }
+
     }
 
 

@@ -122,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
             if(postDate==null) {
                 Log.d("share", "login, not share");
                 Intent intent = new Intent(getApplicationContext(), CommuHomeActivity.class);
+                intent.putExtra("commu","today");
                 startActivity(intent);
                 finish();
             }
