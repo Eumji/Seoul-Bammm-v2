@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Intro2 extends AppCompatActivity {
 
@@ -54,9 +55,13 @@ public class Intro2 extends AppCompatActivity {
         ll = findViewById(R.id.ll_intro2);
         iv = findViewById(R.id.iv_best);
 
-        Calendar c = Calendar.getInstance();
+        Calendar c = new GregorianCalendar();
+        c.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
+        //Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         currentDate = df.format(c.getTime());
+        Log.d("randomPostNum", "currentDate : " +currentDate);
+
 
         postsList = new ArrayList<>();
         database = FirebaseDatabase.getInstance();
@@ -104,7 +109,13 @@ public class Intro2 extends AppCompatActivity {
                 Log.d("randomPostNum", "onCreate: size = "+postsize);
                 Log.d("randomPostNum", "onCreate: random = "+randPostNum);
 
-                Picasso.get().load(postsList.get(randPostNum).getImage()).fit().centerInside().into(iv);
+                if(postsize == 0){
+                    iv.setImageResource(R.drawable.night_view_ex);
+                } else {
+                    Picasso.get().load(postsList.get(randPostNum).getImage()).fit().centerInside().into(iv);
+                }
+
+
 
                 /*BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
@@ -158,4 +169,5 @@ public class Intro2 extends AppCompatActivity {
         }
         return size;
     }*/
+
 }
