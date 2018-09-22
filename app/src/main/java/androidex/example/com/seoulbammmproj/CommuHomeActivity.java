@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,8 +60,10 @@ public class CommuHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_commu_home);
 
+        setContentView(R.layout.activity_commu_home);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         display = getWindowManager().getDefaultDisplay();
         size = new Point();
         display.getSize(size);
@@ -118,6 +121,11 @@ public class CommuHomeActivity extends AppCompatActivity {
             // 버튼 안보이게
             ivAddPost.setImageResource(R.drawable.nothingbtn);
             ivReFresh.setImageResource(R.drawable.nothingbtn);
+
+            toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         postsList = new ArrayList<>();
@@ -156,7 +164,8 @@ public class CommuHomeActivity extends AppCompatActivity {
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 Post post = dataSnapshot.getValue(Post.class);
                 String delete = post.getDate();
-                for (int i = 0; i < postsList.size(); i++) {
+                int sz=postsList.size();
+                for (int i = 0; i < sz; i++) {
                     if (postsList.get(i).getDate().equals(delete)) {
                         postsList.remove(postsList.get(i));
                         mAdapter.notifyItemRemoved(i);
@@ -177,11 +186,11 @@ public class CommuHomeActivity extends AppCompatActivity {
             }
         });
 
+
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
     } //onCreate()
 
     public void posting(int size) {

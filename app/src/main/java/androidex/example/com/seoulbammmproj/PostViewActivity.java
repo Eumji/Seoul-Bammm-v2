@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,6 +78,9 @@ public class PostViewActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_recommendation_board);
+        LinearLayout ll;
+        ll=findViewById(R.id.rb_ll);
+        ll.setBackgroundResource(R.drawable.background01);
 
         // toolbar 설정
         toolbar = findViewById(R.id.my_toolbar);

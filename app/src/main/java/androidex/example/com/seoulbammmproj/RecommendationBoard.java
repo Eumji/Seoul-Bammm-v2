@@ -74,7 +74,7 @@ public class RecommendationBoard  extends AppCompatActivity {
         region_detail = findViewById(R.id.region_detail);
         explanation = findViewById(R.id.explanation);
         share_btn = findViewById(R.id.share_btn);
-
+//        mainmenu에서 실행함!
 //        Uri uri = getIntent().getData();
 //
 //        if(uri != null){

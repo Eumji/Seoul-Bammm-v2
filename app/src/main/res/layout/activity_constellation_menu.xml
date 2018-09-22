@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg002"
+    android:background="@drawable/background06"
     android:orientation="vertical"
     tools:context=".ConstellationMenu">
 
@@ -17,27 +17,25 @@
         android:background="#00ffffff"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_centerInParent="true"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     <TextView
         android:id="@+id/tv_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:text="일월"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
         android:textSize="25sp"
+        android:text="일월"
         android:fontFamily="@font/seoulhangang"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <TableLayout
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_month"
+        android:layout_below="@id/my_toolbar"
         android:shrinkColumns="0,1">
 
         <TableRow

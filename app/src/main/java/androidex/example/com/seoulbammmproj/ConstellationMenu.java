@@ -58,24 +58,16 @@ public class ConstellationMenu extends AppCompatActivity {
             }
         }).start();
 
-
-//        setView(str_date);
-
         cs01.setOnClickListener(listener);
         cs02.setOnClickListener(listener);
         cs03.setOnClickListener(listener);
         cs04.setOnClickListener(listener);
-//        cs05.setOnClickListener(listener);
-//        cs06.setOnClickListener(listener);
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
-
-
-
 
     void getArray(){//이미지 매열에 이미지 넣는 함수 i=월, j=번째
         for(int i=1;i<=12;i++) {
@@ -111,11 +103,6 @@ public class ConstellationMenu extends AppCompatActivity {
                 case R.id.cs_04:
                     whi=4;
                     break;
-//                case R.id.cs_05:
-//                    whi=5;
-//                    break;
-//                case R.id.cs_06:
-//                    whi=6;
             }
 
             Intent intent = new Intent(ConstellationMenu.this, Constellation.class);
