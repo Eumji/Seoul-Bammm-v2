@@ -35,19 +35,25 @@ public class MainMenu extends AppCompatActivity {
 
         if(uri != null) {
             String msg = uri.getQueryParameter("msg");
-            Log.d("share", msg);
-            if (msg.charAt(0) == '1') {
-                msg = msg.substring(1);
-                Intent i = new Intent(this, RecommendationBoard.class);
-                i.putExtra("region", msg);
-                startActivity(i);
-                finish();
-            } else if (msg.charAt(0) == '2') {
-                msg = msg.substring(1);
-                Intent intent = new Intent(MainMenu.this, LoginActivity.class);
-                intent.putExtra("date", msg);
-                startActivity(intent);
-                finish();
+            if(msg!=null) {
+                Log.d("share", msg);
+                if (msg.charAt(0) == '1') {
+                    msg = msg.substring(1);
+                    Intent i = new Intent(this, RecommendationBoard.class);
+                    i.putExtra("region", msg);
+                    startActivity(i);
+                    finish();
+                } else if (msg.charAt(0) == '2') {
+                    msg = msg.substring(1);
+                    Intent intent = new Intent(MainMenu.this, LoginActivity.class);
+                    intent.putExtra("date", msg);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+            else {
+                Intent intent_intro1 = new Intent(MainMenu.this, Intro1.class);
+                startActivity(intent_intro1);
             }
         }
 
