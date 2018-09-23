@@ -46,3 +46,8 @@
 ![readme_10](https://github.com/Eumji/Seoul-Bammm-v2/blob/master/img/readme_10.jpg?raw=true)
 
 <br>
+<br>
+
+#### Developed by 엄채원양김
+
+<br>
