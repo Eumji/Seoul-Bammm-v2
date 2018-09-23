@@ -16,7 +16,17 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/tvCommuTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:text="오늘의 서울"
+            android:fontFamily="@font/seoulhangang" />
+    </android.support.v7.widget.Toolbar>
 
 
 

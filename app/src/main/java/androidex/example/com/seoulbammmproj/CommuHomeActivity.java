@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -49,6 +50,7 @@ public class CommuHomeActivity extends AppCompatActivity {
     String viewFlag;
 
     ImageView ivAddPost, ivReFresh;
+    TextView tvCommuTitle;
     Toolbar toolbar = null;
 
     FirebaseDatabase database;
@@ -81,6 +83,7 @@ public class CommuHomeActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         ivAddPost = findViewById(R.id.btnAddPost);
         ivReFresh = findViewById(R.id.btnReFresh);
+        tvCommuTitle = findViewById(R.id.tvCommuTitle);
 
         viewFlag = getIntent().getStringExtra("commu");
         if(viewFlag.equals("today")){
@@ -113,6 +116,7 @@ public class CommuHomeActivity extends AppCompatActivity {
                 }
             });
         } else if (viewFlag.equals("yesterday")){
+            tvCommuTitle.setText("어제의 서울");
             Calendar c = new GregorianCalendar();
             c.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
