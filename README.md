@@ -1,4 +1,4 @@
-# 2018년 서울시 앱 공모전 출품작(서울의 달)
+# 2018년 서울시 앱 공모전 출품작(서울의 )
 
 #### <첫 화면>
 ![readme_00](https://github.com/Eumji/Seoul-Bammm-v2/blob/master/img/readme_00.jpg?raw=true)
