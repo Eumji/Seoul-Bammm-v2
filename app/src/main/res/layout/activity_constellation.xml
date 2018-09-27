@@ -58,16 +58,17 @@
         android:layout_below="@id/cs_view"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="25dp">
+
         <TextView
             android:id="@+id/cs_story"
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="설화: "
-            android:textSize="15sp"
+            android:layout_margin="10dp"
             android:fontFamily="@font/seoulhangang"
-            android:lineSpacingExtra="7dp"/>
+            android:lineSpacingExtra="10dp"
+            android:text="설화: "
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
     </ScrollView>
 
 

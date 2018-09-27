@@ -31,6 +31,8 @@ public class Intro2 extends AppCompatActivity {
     int postsize, randPostNum;
     String currentDate;
     ArrayList<Post> postsList;
+    int maxLike=0;
+    int maxLikeWhi=0;
 
     RelativeLayout ll = null;
     ImageView iv = null;
@@ -82,6 +84,16 @@ public class Intro2 extends AppCompatActivity {
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         Post post = dataSnapshot.getValue(Post.class);
                         postsList.add(post);
+                        int sz=postsList.size();
+                        for(int i=0;i<sz;i++){
+                            int nowLike = Integer.parseInt(postsList.get(i).getLike());
+                            if(nowLike>maxLike){
+                                maxLike=nowLike;
+                                maxLikeWhi=postsList.size()-1;
+                                Log.d("randomPostNum", "onDataChange: max = "+maxLike+maxLikeWhi);
+                            }
+                        }
+
                         Log.d("randomPostNum", "onDataChange: count = "+postsList.size());
                     }
 
@@ -118,7 +130,9 @@ public class Intro2 extends AppCompatActivity {
                     randPostNum = (int)(Math.random()*postsize);
                     Log.d("randomPostNum", "onCreate: size = "+postsize);
                     Log.d("randomPostNum", "onCreate: random = "+randPostNum);
-                    Picasso.get().load(postsList.get(randPostNum).getImage()).fit().centerInside().into(iv);
+                    Log.d("randomPostNum", "onCreate: maxWhi = "+maxLikeWhi);
+                    Log.d("randomPostNum", "onCreate: maxLike = "+maxLike);
+                    Picasso.get().load(postsList.get(maxLikeWhi).getImage()).fit().centerInside().into(iv);
                 }
             }
         }, 2000);
