@@ -1,13 +1,20 @@
 package androidex.example.com.seoulbammmproj;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -60,9 +67,9 @@ public class MainMenu extends AppCompatActivity {
         btn_menu1.setOnClickListener(listener_mainMenu);
         btn_menu2.setOnClickListener(listener_mainMenu);
         btn_menu3.setOnClickListener(listener_mainMenu);
-
-//        getAppKeyHash();
     }
+
+
 
     View.OnClickListener listener_mainMenu = new View.OnClickListener() {
         @Override
@@ -84,21 +91,5 @@ public class MainMenu extends AppCompatActivity {
             }
         }
     };
-//    해쉬값 찾는 법
-//    private void getAppKeyHash() {
-//        try {
-//            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-//            for (Signature signature : info.signatures) {
-//                MessageDigest md;
-//                md = MessageDigest.getInstance("SHA");
-//                md.update(signature.toByteArray());
-//                String something = new String(Base64.encode(md.digest(), 0));
-//                Log.d("Hash key", something);
-//            }
-//        } catch (Exception e) {
-//// TODO Auto-generated catch block
-//            Log.e("name not found", e.toString());
-//        }
-//    }
 }
 
